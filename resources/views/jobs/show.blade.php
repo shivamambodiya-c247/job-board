@@ -1,5 +1,7 @@
 <x-layout>
         <x-card class="rounded-md border border-slate-300 p-4 mb-4 bg-white shadow-sm">
+            <x-breadcrumbs :job="$job" />
+
             <div class="flex justify-between">
                 <h2 class="text-lg font-medium">{{ $job->title }}</h2>
                 <div class="text-slate-500">
