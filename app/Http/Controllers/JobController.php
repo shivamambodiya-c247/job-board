@@ -18,6 +18,15 @@ class JobController extends Controller
         ]);
     }
 
+    public function filter(Request $request)
+    {
+        $filters = request()->only('search', 'min_salary', 'max_salary', 'experience', 'category');
+
+        return view('jobs.index', [
+            'jobs' => Job::query()->filter($filters)->get()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
