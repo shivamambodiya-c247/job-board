@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\Employer;
 class JobController extends Controller
 {
     /**
@@ -23,7 +24,7 @@ class JobController extends Controller
         $filters = request()->only('search', 'min_salary', 'max_salary', 'experience', 'category');
 
         return view('jobs.index', [
-            'jobs' => Job::query()->filter($filters)->get()
+            'jobs' => Job::with('employer')->filter($filters)->get()
         ]);
     }
 
@@ -49,7 +50,7 @@ class JobController extends Controller
     public function show(Job $job)
     {
         return view('jobs.show', [
-            'job' => $job
+            'job' => $job->load('employer.jobs')
         ]);
     }
 

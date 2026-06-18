@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class AuthController extends Controller
+{
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('auth.create');
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $remember = $request->filled('remember');
+
+        if (!auth()->attempt($credentials, $remember)) {
+            return redirect()->route('auth.create')->with('error', 'Invalid credentials');
+        } else {
+            return redirect()->route('jobs.index');
+        }
+    }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
+}

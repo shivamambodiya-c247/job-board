@@ -9,7 +9,8 @@
     </div>
 
     <div class="mb-4 flex justify-between items-center text-sm text-slate-500">
-        <div class="flex space-x-0">
+        <div class="flex space-x-2">
+            <div>Company name: {{ $job->employer->company_name }}</div>
             <div>{{ $job->location }}</div>
         </div>
 
@@ -23,9 +24,6 @@
             </x-tag>
         </div>
     </div>
-
-
-    <p class="text-sm">{!! nl2br(e($job->description)) !!}</p>
 
     <div>
         <x-link-button href="{{ route('jobs.show', $job) }}">View</x-link-button>

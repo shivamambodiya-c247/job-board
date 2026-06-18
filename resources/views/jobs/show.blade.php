@@ -11,7 +11,8 @@
             </div>
 
             <div class="mb-4 flex justify-between items-center text-sm text-slate-500">
-                <div class="flex space-x-0">
+                <div class="flex space-x-2">
+                    <div>Company name: {{ $job->employer->company_name }}</div>
                     <div>{{ $job->location }}</div>
                 </div>
 
@@ -23,5 +24,20 @@
 
 
             <p class="text-sm">{!! nl2br(e($job->description)) !!}</p>
+        </x-card>
+
+        <x-card>
+            More Jobs from {{ $job->employer->company_name }}
+
+            @foreach ($job->employer->jobs as $otherJob)
+                <div class="flex justify-between align-center p-2 border border-slate-300 mb-2">
+                    <div class="">
+                        <a href="{{ route('jobs.show', $otherJob->id) }}" class="block  text-sm text-slate-700 font-medium hover:underline">{{ $otherJob->title }}</a>
+                        <span class="mt-4 text-sm text-slate-500">{{ $otherJob->created_at->diffForHumans() }}</span>
+                    </div>
+
+                    <div>${{ number_format($otherJob->salary) }}</div>
+                </div>
+            @endforeach
         </x-card>
 </x-layout>
