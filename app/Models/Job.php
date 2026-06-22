@@ -31,6 +31,11 @@ class Job extends Model
         return $this->belongsTo(Employer::class);
     }
 
+    public function jobApplications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
     public function scopeFilter(Builder|QueryBuilder $query, array $filters): Builder|QueryBuilder
     {
         return $query
