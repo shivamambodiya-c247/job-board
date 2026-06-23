@@ -24,6 +24,12 @@
 
 
             <p class="text-sm">{!! nl2br(e($job->description)) !!}</p>
+
+
+            <x-button class="mt-6">
+                <a href="{{ route('job.application.create', $job) }}">Apply</a>
+            </x-button>  
+            
         </x-card>
 
         <x-card>
@@ -40,4 +46,6 @@
                 </div>
             @endforeach
         </x-card>
+
+
 </x-layout>
