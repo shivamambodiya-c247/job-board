@@ -1,6 +1,9 @@
 <x-layout>
+    <x-breadcrumbs :job="$job" :links="[
+                'All Jobs' => route('jobs.index'),
+                'My Applications' => route('my-job-application.index'),
+    ]" />
         <x-card class="rounded-md border border-slate-300 p-4 mb-4 bg-white shadow-sm">
-            <x-breadcrumbs :job="$job" />
 
             <div class="flex justify-between">
                 <h2 class="text-lg font-medium">{{ $job->title }}</h2>
@@ -26,9 +29,13 @@
             <p class="text-sm">{!! nl2br(e($job->description)) !!}</p>
 
 
+            @can('apply', $job)
             <x-button class="mt-6">
-                <a href="{{ route('job.application.create', $job) }}">Apply</a>
+                    <a href="{{ route('job.application.create', $job) }}">Apply</a>
             </x-button>  
+            @else
+                <p class="mt-4 text-center text-slate-500 mb-2 text-sm font-medium">You have already applied for this job.</p>
+            @endcan
             
         </x-card>
 

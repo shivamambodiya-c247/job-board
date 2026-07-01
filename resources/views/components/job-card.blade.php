@@ -25,9 +25,12 @@
         </div>
     </div>
 
-    <div>
+    {{-- <div>
         <x-link-button href="{{ route('jobs.show', $job) }}">View</x-link-button>
-    </div>
+    </div> --}}
+
+    {{ $slot }}
+
 </x-card>
 
     {{-- {{ $jobs->links() }} --}}

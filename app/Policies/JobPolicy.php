@@ -66,6 +66,10 @@ class JobPolicy
 
     public function apply(User $user, Job $job): bool
     {
-        return true;
+        if (!$user) {
+            return true; // Guests may see the Apply button
+        }
+
+        return !$job->hasUserApplied($user);
     }
 }

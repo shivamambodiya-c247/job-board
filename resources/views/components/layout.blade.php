@@ -22,10 +22,12 @@
                 </li>
             </ul>
 
-            <ul class="flex space-x-2">
+            <ul class="flex space-x-4">
             @auth
                 <li>
-                    {{ auth()->user()->name ?? 'Anynomus' }}
+                    <a href="{{ route('my-job-application.index') }}">
+                        {{ auth()->user()->name ?? 'Anonymous' }}: Application
+                    </a>
                 </li>
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
@@ -44,10 +46,18 @@
 
         @if(session('success'))
             <div class="mb-4 text-green-600 bg-green-100 border border-green-300 rounded-md p-4" role="alert">
-                {{ session('success') }}
+                <p class="text-green-600 font-bold">Success!</p>
+                <p>{{ session('success') }}</p>
             </div>
         @endif
 
-        {{  $slot }}
+        @if(session('error'))
+            <div class="mb-4 text-red-600 bg-red-100 border border-red-300 rounded-md p-4" role="alert">
+                <p class="text-red-600 font-bold">Error!</p>
+                <p>{{ session('error') }}</p>
+            </div>
+        @endif
+
+        {{ $slot }}
     </body>
 </html>

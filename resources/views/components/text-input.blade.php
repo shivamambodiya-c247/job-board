@@ -7,5 +7,9 @@
             </svg>
         </button>
     @endif
-    <input x-ref="input-{{$name}}" type="{{$type}}" placeholder="{{ $placeholder }}" name="{{ $name }}" id="{{ $name }}" value="{{ $value }}" class="w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2 pr-8" />
+    <input x-ref="input-{{$name}}" type="{{$type}}" placeholder="{{ $placeholder }}" name="{{ $name }}" id="{{ $name }}" value="{{ old($name, $value) }}" class="w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2 pr-8" />
+
+    @error($name)
+        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+    @enderror
 </div>

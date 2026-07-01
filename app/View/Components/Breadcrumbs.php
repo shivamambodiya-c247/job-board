@@ -11,9 +11,7 @@ class Breadcrumbs extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public $job
-    )
+    public function __construct(public array $links)
     {
         //
     }
